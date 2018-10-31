@@ -1,0 +1,47 @@
+import numpy as np
+import matplotlib.pyplot as plt
+def distance(node1,node2):
+    d=np.sqrt((node2[0]-node1[0])**2+(node2[1]-node1[1])**2)
+    return d
+    
+
+nodes=0+(30-0)*np.random.random((10,2))
+nodes=np.round(nodes)
+
+for i in range(10):
+    plt.ion()
+    plt.scatter(nodes[:,0],nodes[:,1],c='r')
+
+    for i in range(10):
+        plt.text(nodes[i,0],nodes[i,1],str(i))
+    nod_pos=np.random.randint(1,10)
+    print(nod_pos)
+    mynode=nodes[nod_pos,:]
+    plt.scatter(mynode[0],mynode[1],c='b')
+    dist=np.zeros([10,1]) 
+    print(mynode)
+
+    for j in range(10):
+        dist[j]=distance(mynode,nodes[j,:])
+    print(dist)
+
+
+    neigh=[]
+
+    for k in range(10):
+        if(dist[k]<10  and k!=nod_pos):
+            neigh.append(k)
+
+    print(neigh)
+
+    for i in neigh:
+        plt.scatter(nodes[i,0],nodes[i,1],c='g')
+        plt.plot((nodes[i,0],mynode[0]),(nodes[i,1],mynode[1]),c='b')
+    
+    
+    #plt.grid('on')
+    #plt.show()
+    
+    plt.pause(0.5)
+    
+plt.ioff()
